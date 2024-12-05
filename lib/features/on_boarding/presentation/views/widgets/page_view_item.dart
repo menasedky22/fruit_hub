@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fruit_hub/constants.dart';
+import 'package:fruit_hub/core/services/shared_preferences_singletone.dart';
+import 'package:fruit_hub/features/auth/presenrarion/views/login_view.dart';
 import 'package:svg_flutter/svg.dart';
 
 import '../../../../../core/utils/app_text_style.dart';
@@ -41,12 +44,20 @@ class PageViewItem extends StatelessWidget {
               ),
               Visibility(
                 visible: isVisible,
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Text(
-                    'تخط',
-                    style: TextStyles.regular13
-                        .copyWith(color: const Color(0xff949d9e)),
+                child: GestureDetector(
+                  onTap: () {
+                    SharedPreferenceSingletone.seBool(
+                        kIsOnBoardingViewSeen, true);
+                    Navigator.of(context)
+                        .pushReplacementNamed(LoginView.routeName);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Text(
+                      'تخط',
+                      style: TextStyles.regular13
+                          .copyWith(color: const Color(0xff949d9e)),
+                    ),
                   ),
                 ),
               )
